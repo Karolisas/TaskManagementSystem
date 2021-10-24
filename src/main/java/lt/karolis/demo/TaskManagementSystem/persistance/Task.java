@@ -1,13 +1,16 @@
 package lt.karolis.demo.TaskManagementSystem.persistance;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.springframework.context.annotation.Primary;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "TASKS")
 public class Task {
 
     @Id
+    @GeneratedValue
+
     private Long id;
 
     @Column
