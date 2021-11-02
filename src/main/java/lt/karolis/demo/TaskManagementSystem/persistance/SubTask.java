@@ -1,20 +1,19 @@
 package lt.karolis.demo.TaskManagementSystem.persistance;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "TASKS")
+@Table(name = "SUB_TASKS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Task {
+public class SubTask {
 
     @Id
     @GeneratedValue
-
+    @Column(name = "ID")
     private Long id;
 
     @Column
@@ -26,22 +25,17 @@ public class Task {
     @Column
     private int levelPriority;
 
-//    SELECT * FROM SUB_TASKS ;
-//    SELECT * FROM Tasks;
+    @ManyToOne (cascade = CascadeType.DETACH)
+    @JoinColumn (name= "PARENT_ID")
+//    @JsonBackReference
+    private Task parentTask;
 
-    //    @OneToMany(mappedBy = "parentTask", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OneToMany(mappedBy = "parentTask", cascade = CascadeType.ALL)
-//    @JsonManagedReference
-//    @JoinColumn(name = "XX_SUB_TASK_ID")
-//    @OneToMany(cascade = CascadeType.ALL)
-    private List<SubTask> subTask;
-
-    public List<SubTask> getSubTask() {
-        return subTask;
+    public Task getParentTask() {
+        return parentTask;
     }
 
-    public Task setSubTask(List<SubTask> subTask) {
-        this.subTask = subTask;
+    public SubTask setParentTask(Task parentTask) {
+        this.parentTask = parentTask;
         return this;
     }
 
@@ -49,7 +43,7 @@ public class Task {
         return id;
     }
 
-    public Task setId(Long id) {
+    public SubTask setId(Long id) {
         this.id = id;
         return this;
     }
@@ -58,7 +52,7 @@ public class Task {
         return title;
     }
 
-    public Task setTitle(String title) {
+    public SubTask setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -67,7 +61,7 @@ public class Task {
         return description;
     }
 
-    public Task setDescription(String description) {
+    public SubTask setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -76,10 +70,12 @@ public class Task {
         return levelPriority;
     }
 
-    public Task setLevelPriority(int levelPriority) {
+    public SubTask setLevelPriority(int levelPriority) {
         this.levelPriority = levelPriority;
         return this;
     }
+
+
 
     @Override
     public String toString() {
