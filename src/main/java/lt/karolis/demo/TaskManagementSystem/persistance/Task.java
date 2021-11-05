@@ -1,7 +1,6 @@
 package lt.karolis.demo.TaskManagementSystem.persistance;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -24,7 +23,7 @@ public class Task {
     private String description;
 
     @Column
-    private int levelPriority;
+    private Priority levelPriority;
 
 //    SELECT * FROM SUB_TASKS ;
 //    SELECT * FROM Tasks;
@@ -34,14 +33,14 @@ public class Task {
 //    @JsonManagedReference
 //    @JoinColumn(name = "XX_SUB_TASK_ID")
 //    @OneToMany(cascade = CascadeType.ALL)
-    private List<SubTask> subTask;
+    private List<SubTask> subTasks;
 
-    public List<SubTask> getSubTask() {
-        return subTask;
+    public List<SubTask> getSubTasks() {
+        return subTasks;
     }
 
-    public Task setSubTask(List<SubTask> subTask) {
-        this.subTask = subTask;
+    public Task setSubTasks(List<SubTask> subTask) {
+        this.subTasks = subTask;
         return this;
     }
 
@@ -72,11 +71,11 @@ public class Task {
         return this;
     }
 
-    public int getLevelPriority() {
+    public Priority getLevelPriority() {
         return levelPriority;
     }
 
-    public Task setLevelPriority(int levelPriority) {
+    public Task setLevelPriority(Priority levelPriority) {
         this.levelPriority = levelPriority;
         return this;
     }

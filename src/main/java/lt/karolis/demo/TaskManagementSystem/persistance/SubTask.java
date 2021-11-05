@@ -23,7 +23,7 @@ public class SubTask {
     private String description;
 
     @Column
-    private int levelPriority;
+    private Priority levelPriority;
 
     @ManyToOne (cascade = CascadeType.DETACH)
     @JoinColumn (name= "PARENT_ID")
@@ -66,12 +66,12 @@ public class SubTask {
         return this;
     }
 
-    public int getLevelPriority() {
+    public Priority getLevelPriority() {
         return levelPriority;
     }
 
-    public SubTask setLevelPriority(int levelPriority) {
-        this.levelPriority = levelPriority;
+    public SubTask setLevelPriority(Priority priority) {
+        this.levelPriority = priority;
         return this;
     }
 
