@@ -12,4 +12,6 @@ public interface SubTaskRepository extends JpaRepository<SubTask, Long>, JpaSpec
     SubTask getById(Long id);
 
     List<SubTask> findAll();
+
+    List<SubTask> findAllByParentTask(Long parentId);
 }

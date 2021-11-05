@@ -1,6 +1,8 @@
 package lt.karolis.demo.TaskManagementSystem.service;
 
 import lt.karolis.demo.TaskManagementSystem.controller.TaskNotFoundException;
+import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
+import lt.karolis.demo.TaskManagementSystem.persistance.SubTask;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import lt.karolis.demo.TaskManagementSystem.persistance.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class TaskService {
 
     @Autowired
     TaskRepository repository;
+
+    @Autowired
+    SubTaskService subTaskService;
 
     public Task getTaskById(Long id) {
         System.out.println("getTaskById " + id);
@@ -49,5 +54,29 @@ public class TaskService {
                 ).orElseThrow(() -> new TaskNotFoundException("No task to update"));
 
         return repository.findById(id).get();
+    }
+
+    public Task changeTask(Long id, Priority priority) {
+      Task newTask =   repository.findById(id)
+                .map(task -> {
+                            if (!areSubtasksNotDone(task)){
+                                task.setLevelPriority(priority);
+                            }
+                            return repository.save(task);
+                        }
+                ).orElseThrow(() -> new TaskNotFoundException("Task has unfinished subTasks"));
+
+        return repository.save(newTask);
+    }
+
+    public boolean areSubtasksNotDone(Task task) {
+        return task.getSubTasks()
+                .stream()
+                .map(SubTask::getLevelPriority)
+                .anyMatch(priority -> !Priority.DONE.equals(priority));
+    }
+
+    public Task closeTask(Long id) {
+        return changeTask(id, Priority.DONE);
     }
 }

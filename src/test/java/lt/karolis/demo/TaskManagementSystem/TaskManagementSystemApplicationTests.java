@@ -24,14 +24,14 @@ class TaskManagementSystemApplicationTests {
     @Autowired
     TaskRepository repository;
 
-//    @Test
-//    void contextLoads() {
-////        repository.findById(101l)
-////        TaskController taskController = new TaskControllerTest(service,repository);
-//        TaskController taskController = new TaskController();
-//        taskController.createTask(new Task().setId(666L).setDescription("asdfadf"));
-//        Assert.assertEquals("asdfadf", taskController.getTaskById(666l).getDescription());
-//    }
+    @Test
+    void contextLoads() {
+//        repository.findById(101l)
+//        TaskController taskController = new TaskControllerTest(service,repository);
+        TaskController taskController = new TaskController();
+        taskController.createTask(new Task().setId(666L).setDescription("asdfadf"));
+        Assert.assertEquals("asdfadf", taskController.getTaskById(666l).getDescription());
+    }
 
 
 }

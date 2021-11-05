@@ -1,5 +1,6 @@
 package lt.karolis.demo.TaskManagementSystem.service;
 
+import com.fasterxml.jackson.databind.jsontype.SubtypeResolver;
 import lt.karolis.demo.TaskManagementSystem.controller.TaskNotFoundException;
 import lt.karolis.demo.TaskManagementSystem.persistance.SubTask;
 import lt.karolis.demo.TaskManagementSystem.persistance.SubTaskRepository;
@@ -51,5 +52,9 @@ public class SubTaskService {
                 ).orElseThrow(() -> new TaskNotFoundException("No task to update"));
 
         return repository.findById(id).get();
+    }
+
+    public List<SubTask> getSubtasksByParent(Long id){
+        return repository.findAllByParentTask(id);
     }
 }
