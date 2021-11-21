@@ -1,5 +1,6 @@
 package lt.karolis.demo.TaskManagementSystem.controller;
 
+import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import lt.karolis.demo.TaskManagementSystem.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +52,10 @@ public class TaskController {
         service.deleteTask(id);
         return "delele succesful";
     }
+
+    @PutMapping(value = "/closeTask")
+    public Task closeTask(@RequestParam Long id){
+        return service.closeTask(id);
+    }
+
 }

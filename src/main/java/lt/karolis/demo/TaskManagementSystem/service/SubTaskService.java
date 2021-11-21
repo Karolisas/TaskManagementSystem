@@ -1,8 +1,9 @@
 package lt.karolis.demo.TaskManagementSystem.service;
 
+import com.fasterxml.jackson.databind.jsontype.SubtypeResolver;
 import lt.karolis.demo.TaskManagementSystem.controller.TaskNotFoundException;
-import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
 import lt.karolis.demo.TaskManagementSystem.persistance.SubTask;
+import lt.karolis.demo.TaskManagementSystem.persistance.SubTaskRepository;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import lt.karolis.demo.TaskManagementSystem.persistance.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +13,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TaskService {
+public class SubTaskService {
 
     @Autowired
-    TaskRepository repository;
+    SubTaskRepository repository;
 
-    @Autowired
-    SubTaskService subTaskService;
-
-    public Task getTaskById(Long id) {
+    public SubTask getSubTaskById(Long id) {
         System.out.println("getTaskById " + id);
         return repository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException("No task Found with id: " + id));
     }
 
-    public List<Task> getAllTasks() {
+    public List<SubTask> getAllTasks() {
         return repository.findAll();
     }
 
-    public Task createTask(Task task) {
+    public SubTask createTask(SubTask task) {
         return repository.save(task);
     }
 
@@ -43,7 +41,7 @@ public class TaskService {
         }
     }
 
-    public Task updateTask(Long id, Task task) {
+    public SubTask updateTask(Long id, SubTask task) {
         repository.findById(id)
                 .map(a -> {
                             a.setDescription(task.getDescription());
@@ -56,27 +54,7 @@ public class TaskService {
         return repository.findById(id).get();
     }
 
-    public Task changeTask(Long id, Priority priority) {
-      Task newTask =   repository.findById(id)
-                .map(task -> {
-                            if (!areSubtasksNotDone(task)){
-                                task.setLevelPriority(priority);
-                            }
-                            return repository.save(task);
-                        }
-                ).orElseThrow(() -> new TaskNotFoundException("Task has unfinished subTasks"));
-
-        return repository.save(newTask);
-    }
-
-    public boolean areSubtasksNotDone(Task task) {
-        return task.getSubTasks()
-                .stream()
-                .map(SubTask::getLevelPriority)
-                .anyMatch(priority -> !Priority.DONE.equals(priority));
-    }
-
-    public Task closeTask(Long id) {
-        return changeTask(id, Priority.DONE);
+    public List<SubTask> getSubtasksByParent(Long id){
+        return repository.findAllByParentTask(id);
     }
 }
