@@ -1,6 +1,5 @@
 package lt.karolis.demo.TaskManagementSystem.controller;
 
-import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import lt.karolis.demo.TaskManagementSystem.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,14 @@ public class TaskController {
         return service.createTask(task);
     }
 
+    @PostMapping("/savee")
+    public String createTaskReturnString(@RequestBody Task task) {
+        Task newTask = service.createTask(task);
+        if (newTask != null)
+            return "success";
+         return "failure";
+    }
+
 //    @PutMapping(value = "/{id}")
 //    public Task updateTask(@PathVariable Long id, @RequestBody Task task) {
 //        return service.updateTask(id, task);
@@ -54,7 +61,7 @@ public class TaskController {
     }
 
     @PutMapping(value = "/closeTask")
-    public Task closeTask(@RequestParam Long id){
+    public Task closeTask(@RequestParam Long id) {
         return service.closeTask(id);
     }
 

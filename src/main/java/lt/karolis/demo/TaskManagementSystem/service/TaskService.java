@@ -31,7 +31,13 @@ public class TaskService {
     }
 
     public Task createTask(Task task) {
-        return repository.save(task);
+        Task newTask = null;
+        if (task.getDescription() != null){
+            return repository.save(task);
+        } else {
+            return newTask;
+        }
+//        return repository.save(task);
     }
 
 

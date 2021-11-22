@@ -15,11 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-public class TaskServiceTest {
-
-    @Autowired
-    TaskController taskController;
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE) // webEnvironemt - not to launch controller.
+public class TaskServiceIntegrationTest_1 {
 
     @Autowired
     TaskService taskService;
@@ -50,6 +47,14 @@ public class TaskServiceTest {
                 new SubTask().setId(556L).setLevelPriority(Priority.DONE)));
 
         Assert.assertEquals(false, taskService.areSubtasksNotDone(task));
-
     }
+
+    @Test
+    public void saveTask() {
+        Task task = taskService.createTask(new Task().setDescription("asad").setTitle("title"));
+        Assert.assertNotNull(task);
+        Assert.assertNotNull(task.getId());
+        Assert.assertEquals("title", task.getTitle());
+    }
+
 }

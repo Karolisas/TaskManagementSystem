@@ -81,6 +81,30 @@ public class Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (id != null ? !id.equals(task.id) : task.id != null) return false;
+        if (title != null ? !title.equals(task.title) : task.title != null) return false;
+        if (description != null ? !description.equals(task.description) : task.description != null) return false;
+        if (levelPriority != task.levelPriority) return false;
+        return subTasks != null ? subTasks.equals(task.subTasks) : task.subTasks == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (levelPriority != null ? levelPriority.hashCode() : 0);
+        result = 31 * result + (subTasks != null ? subTasks.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Task{" +
                 "id=" + id +
