@@ -1,5 +1,6 @@
 package lt.karolis.demo.TaskManagementSystem.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.karolis.demo.TaskManagementSystem.controller.TaskController;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import org.junit.Before;
@@ -11,12 +12,14 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -25,6 +28,11 @@ import static org.mockito.Mockito.when;
 @WebMvcTest(TaskController.class)
 
 public class UnitTestMockMvcTaskController_4 {
+
+    public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(
+            MediaType.APPLICATION_JSON.getType(),
+            MediaType.APPLICATION_JSON.getSubtype(),
+            Charset.forName("utf8"));
 
     @Autowired
     private MockMvc mockMvc;
@@ -44,9 +52,8 @@ public class UnitTestMockMvcTaskController_4 {
     public void getMappingTest() throws Exception {
         when(taskService.getAllTasks()).thenReturn(List.of(new Task(), new Task()));
 
-        mockMvc.perform(MockMvcRequestBuilders
-                .get("/task/all")
-        ).andDo(MockMvcResultHandlers.print())
+        mockMvc.perform(MockMvcRequestBuilders.get("/task/all"))
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -58,8 +65,10 @@ public class UnitTestMockMvcTaskController_4 {
         when(taskService.createTask(task)).thenReturn(task);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/task/savee", new Task()))
-                .andExpect(MockMvcResultMatchers.status().isServiceUnavailable())
+                .perform(MockMvcRequestBuilders.post("/task/savee", task)
+                        .contentType(APPLICATION_JSON_UTF8)
+                        .content(new ObjectMapper().writeValueAsString(task)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
 
