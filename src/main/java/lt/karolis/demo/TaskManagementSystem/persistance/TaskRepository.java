@@ -12,4 +12,6 @@ public interface TaskRepository extends JpaRepository<Task, Long>, JpaSpecificat
     Task getById(Long id);
 
     List<Task> findAll();
+
+    Task getByTitle(String test);
 }

@@ -65,7 +65,7 @@ public class UnitTestMockMvcTaskController_4 {
         when(taskService.createTask(task)).thenReturn(task);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/task/savee", task)
+                .perform(MockMvcRequestBuilders.post("/task/save", task)
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(new ObjectMapper().writeValueAsString(task)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -81,10 +81,12 @@ public class UnitTestMockMvcTaskController_4 {
         Task task = new Task();
 
 
-        when(taskService.createTask(ArgumentMatchers.any(Task.class))).thenReturn(task);
+        when(taskService.createTask(ArgumentMatchers.any(Task.class))).thenReturn(null);
 
         mockMvc
-                .perform(MockMvcRequestBuilders.post("/task/save", task))
+                .perform(MockMvcRequestBuilders.post("/task/save", task)
+                        .contentType(APPLICATION_JSON_UTF8)
+                        .content(new ObjectMapper().writeValueAsString(task)))
                 .andExpect(MockMvcResultMatchers.status().is(302))
                 .andReturn();
 

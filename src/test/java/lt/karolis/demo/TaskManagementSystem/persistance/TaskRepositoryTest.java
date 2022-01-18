@@ -3,6 +3,8 @@ package lt.karolis.demo.TaskManagementSystem.persistance;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -29,19 +31,19 @@ public class TaskRepositoryTest {
     public void setUp() throws Exception {
     }
 
-    @Test
-    public void getTaskById() {
+    @Test @Order(1)
+    public void agetTaskById() {
         Task task = new Task();
 //        task.setId(34L); // if Id is set -> org.hibernate.PersistentObjectException: detached entity passed to persist:
         task.setTitle("Test");
 
-        taskRepository.save(task);
-//        testEntityManager.persist(task); //does not work
-        Task retrievedTask = taskRepository.getById(1L);
+//        taskRepository.save(task);
+        testEntityManager.persist(task);
+        Task retrievedTask = taskRepository.getByTitle("Test");
         Assert.assertEquals(task, retrievedTask);
     }
 
-    @Test
+    @Test @Order(20) @AfterAll
     public void findAll() {
         Task task = new Task();
         task.setTitle("TestAll");

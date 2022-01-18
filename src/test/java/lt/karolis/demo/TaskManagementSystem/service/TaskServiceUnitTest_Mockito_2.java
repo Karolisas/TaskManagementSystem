@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class TaskServiceMockitoTest_2 {
+public class TaskServiceUnitTest_Mockito_2 {
 
     @Mock
     private TaskRepository taskRepository;
