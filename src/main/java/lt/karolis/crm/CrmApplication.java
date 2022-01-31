@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jca.support.LocalConnectionFactoryBean;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.persistence.EntityManager;
@@ -19,6 +20,7 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 @EnableSwagger2
+//@EnableWebMvc
 @ComponentScan (basePackages = "lt.karolis.crm")
 public class CrmApplication {
 

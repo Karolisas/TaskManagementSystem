@@ -24,7 +24,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
 //    @Transactional // use later to check
     public List<Customer> getCustomer() {
-        sessionFactory.getCurrentSession(); //No CurrentSessionContext configured!
+//        sessionFactory.getCurrentSession(); //No CurrentSessionContext configured!
         List<Customer> list = entityManager.createQuery("from Customer", Customer.class).getResultList(); // veikia
 //        entityManager.createQuery("from Customers");
 //        Customer customer = session.get(Customer.class, 1L);
