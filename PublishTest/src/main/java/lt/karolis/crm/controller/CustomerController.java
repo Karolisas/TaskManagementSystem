@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-//@Controller //doesn't work
-@RestController
+@Controller //doesn't work
+//@RestController
 @RequestMapping("/customers")
 public class CustomerController {
 
