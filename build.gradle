@@ -8,7 +8,7 @@ plugins {
 
 group = 'lt.karolis.demo'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '15'
 
 repositories {
     mavenCentral()
@@ -38,6 +38,7 @@ publishing {
 
 
 dependencies {
+//    implementation project (':PublishTest')
     implementation 'org.springframework.boot:spring-boot-starter'
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
