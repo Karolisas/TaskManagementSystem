@@ -21,20 +21,6 @@ configurations {
     }
 }
 
-publishing {
-    publications {
-        myLibrary(MavenPublication) {
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            name = 'myRepo'
-            url = layout.buildDirectory.dir("repo")
-        }
-    }
-}
 
 
 dependencies {
@@ -65,6 +51,7 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'io.spring.dependency-management' // in subprojects - not in allprojects
+    apply plugin: 'maven-publish'
 
     repositories {
         mavenCentral()
@@ -75,6 +62,21 @@ subprojects {
             mavenBom "org.springframework.boot:spring-boot-dependencies:2.4.12"
         }
     }
+    publishing {
+        publications {
+            myLibrary(MavenPublication) {
+                from components.java
+            }
+        }
+
+        repositories {
+            maven {
+                name = 'myRepo'
+                url = layout.buildDirectory.dir("repo")
+            }
+        }
+    }
+
 
 }
 
@@ -83,7 +85,9 @@ allprojects {
 }
 
 project(':PublishTest') {
-
+    group = 'lt.karolis.sample'
+//    artifact= 'library'
+    version = '1.1'
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
