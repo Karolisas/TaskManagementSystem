@@ -4,9 +4,11 @@ import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import lt.karolis.demo.TaskManagementSystem.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,11 +30,16 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Task getTaskById(@PathVariable Long id) {
+    public EntityModel<Task> getTaskById(@PathVariable Long id) {
         Task task = service.getTaskById(id);
         if (task == null)
             throw new TaskNotFoundException("No task Found with id: " + id);
-        return task;
+
+        EntityModel<Task> taskEntityModel = EntityModel.of(task);
+        Link linkTo = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllTasks()).withRel("all-users");
+        taskEntityModel.add(linkTo);
+
+        return taskEntityModel;
     }
 
     @GetMapping("/all")

@@ -22,7 +22,7 @@ public class SubTask {
     @Column
     private String description;
 
-    @Column
+    @Column (name = "level_priority")
     private Priority levelPriority;
 
     @ManyToOne (cascade = CascadeType.DETACH)

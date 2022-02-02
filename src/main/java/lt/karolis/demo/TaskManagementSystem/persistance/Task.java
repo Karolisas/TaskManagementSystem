@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "TASKS")
@@ -22,8 +23,8 @@ public class Task {
     @Column
     private String description;
 
-    @Column
-    private Priority levelPriority;
+    @Column (name = "level_priority")
+    private int levelPriority;
 
 //    SELECT * FROM SUB_TASKS ;
 //    SELECT * FROM Tasks;
@@ -71,11 +72,11 @@ public class Task {
         return this;
     }
 
-    public Priority getLevelPriority() {
+    public int getLevelPriority() {
         return levelPriority;
     }
 
-    public Task setLevelPriority(Priority levelPriority) {
+    public Task setLevelPriority(int levelPriority) {
         this.levelPriority = levelPriority;
         return this;
     }
@@ -94,14 +95,10 @@ public class Task {
         return subTasks != null ? subTasks.equals(task.subTasks) : task.subTasks == null;
     }
 
+
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (levelPriority != null ? levelPriority.hashCode() : 0);
-        result = 31 * result + (subTasks != null ? subTasks.hashCode() : 0);
-        return result;
+        return Objects.hash(id, title, description, levelPriority, subTasks);
     }
 
     @Override
@@ -111,6 +108,7 @@ public class Task {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", levelPriority=" + levelPriority +
+                ", subTasks=" + subTasks +
                 '}';
     }
 }

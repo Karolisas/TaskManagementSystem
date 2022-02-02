@@ -66,7 +66,7 @@ public class TaskService {
       Task newTask =   repository.findById(id)
                 .map(task -> {
                             if (!areSubtasksNotDone(task)){
-                                task.setLevelPriority(priority);
+                                task.setLevelPriority(priority.ordinal());
                             }
                             return repository.save(task);
                         }
