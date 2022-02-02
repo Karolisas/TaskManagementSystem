@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class Task {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column @Size(min=5, message = "Name failed")
     private String title;
 
     @Column

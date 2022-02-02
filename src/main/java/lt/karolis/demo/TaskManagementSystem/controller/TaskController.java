@@ -6,9 +6,11 @@ import lt.karolis.demo.TaskManagementSystem.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -39,8 +41,8 @@ public class TaskController {
     }
 
     @PostMapping("/save")
-    public HttpEntity<Task> createTask(@RequestBody Task task) {
-        System.out.println("asdasd");
+    public HttpEntity<Task> createTask(@RequestBody @Valid Task task) {
+        System.out.println("Create Task");
         Task savedTask = service.createTask(task);
 
         URI location = ServletUriComponentsBuilder
