@@ -17,13 +17,13 @@ public class TaskService {
     @Autowired
     TaskRepository repository;
 
-    @Autowired
-    SubTaskService subTaskService;
+//    @Autowired
+//    SubTaskService subTaskService;
 
-    public Task getTaskById(Long id) {
+    public Task getTaskById(Long id) throws TaskNotFoundException {
         System.out.println("getTaskById " + id);
-        return repository.findById(id)
-                .orElseThrow(() -> new TaskNotFoundException("No task Found with id: " + id));
+        return repository.findById(id).orElse(null);
+//                .orElseThrow(() -> new TaskNotFoundException("No task Found with id: " + id));
     }
 
     public List<Task> getAllTasks() {

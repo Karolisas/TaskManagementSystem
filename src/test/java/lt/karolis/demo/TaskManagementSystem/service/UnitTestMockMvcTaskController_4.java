@@ -2,22 +2,31 @@ package lt.karolis.demo.TaskManagementSystem.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.karolis.demo.TaskManagementSystem.controller.TaskController;
+import lt.karolis.demo.TaskManagementSystem.persistance.SubTaskRepository;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.result.StatusResultMatchers;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -25,7 +34,12 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(TaskController.class)
+//@SpringBootTest
+@WebMvcTest()
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = TestConfig.class)
+//@WebAppConfiguration
+//@ContextConfiguration(classes=OrderServiceConfig.class, loader=AnnotationConfigContextLoader.class)
 
 public class UnitTestMockMvcTaskController_4 {
 
@@ -37,7 +51,12 @@ public class UnitTestMockMvcTaskController_4 {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Mock
+    SubTaskRepository subTaskRepository;
+    @Mock
+    SubTaskService service;
+
+    @Mock
     TaskService taskService;
 
     @InjectMocks
@@ -93,5 +112,13 @@ public class UnitTestMockMvcTaskController_4 {
 
 //        Assert.assertEquals("failure", taskController.createTask2(task));
 
+    }
+
+    @Test
+    public void getTask_throwsException () throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/task/get/500")
+                .contentType(APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andReturn();
     }
 }

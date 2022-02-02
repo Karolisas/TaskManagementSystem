@@ -11,8 +11,12 @@ import java.util.List;
 @RequestMapping("task/subtask")
 public class SubTaskController {
 
-    @Autowired
-    SubTaskService service;
+//    @Autowired
+    private final SubTaskService service;
+
+    public SubTaskController(SubTaskService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public String getSubTask() {

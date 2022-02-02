@@ -3,8 +3,12 @@ package lt.karolis.demo.TaskManagementSystem.controller;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import lt.karolis.demo.TaskManagementSystem.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,7 +26,10 @@ public class TaskController {
 
     @GetMapping("/{id}")
     public Task getTaskById(@PathVariable Long id) {
-        return service.getTaskById(id);
+        Task task = service.getTaskById(id);
+        if (task == null)
+            throw new TaskNotFoundException("No task Found with id: " + id);
+        return task;
     }
 
     @GetMapping("/all")
@@ -31,9 +38,17 @@ public class TaskController {
     }
 
     @PostMapping("/save")
-    public Task createTask(@RequestBody Task task) {
+    public HttpEntity<Task> createTask(@RequestBody Task task) {
         System.out.println("asdasd");
-        return service.createTask(task);
+        Task savedTask = service.createTask(task);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedTask.getId()).toUri();
+
+        ResponseEntity<Task> responseEntity = ResponseEntity.created(location).build();
+        return responseEntity;
     }
 
     @PostMapping("/savee")
@@ -41,7 +56,7 @@ public class TaskController {
         Task newTask = service.createTask(task);
         if (newTask != null)
             return "success";
-         return "failure";
+        return "failure";
     }
 
 //    @PutMapping(value = "/{id}")

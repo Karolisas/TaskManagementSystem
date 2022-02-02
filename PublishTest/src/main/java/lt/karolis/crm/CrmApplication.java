@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
-@SpringBootApplication
+//@SpringBootApplication
 @EnableSwagger2
 //@EnableWebMvc
 @ComponentScan (basePackages = "lt.karolis.crm")

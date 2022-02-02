@@ -15,8 +15,11 @@ import java.util.List;
 @Service
 public class SubTaskService {
 
-    @Autowired
-    SubTaskRepository repository;
+    private final SubTaskRepository repository;
+
+    public SubTaskService(SubTaskRepository repository) {
+        this.repository = repository;
+    }
 
     public SubTask getSubTaskById(Long id) {
         System.out.println("getTaskById " + id);
