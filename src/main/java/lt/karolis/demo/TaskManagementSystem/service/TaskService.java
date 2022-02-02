@@ -1,6 +1,6 @@
 package lt.karolis.demo.TaskManagementSystem.service;
 
-import lt.karolis.demo.TaskManagementSystem.controller.TaskNotFoundException;
+import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
 import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
 import lt.karolis.demo.TaskManagementSystem.persistance.SubTask;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;

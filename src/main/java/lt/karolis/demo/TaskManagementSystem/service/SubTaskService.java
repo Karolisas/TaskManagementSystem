@@ -1,12 +1,8 @@
 package lt.karolis.demo.TaskManagementSystem.service;
 
-import com.fasterxml.jackson.databind.jsontype.SubtypeResolver;
-import lt.karolis.demo.TaskManagementSystem.controller.TaskNotFoundException;
+import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
 import lt.karolis.demo.TaskManagementSystem.persistance.SubTask;
 import lt.karolis.demo.TaskManagementSystem.persistance.SubTaskRepository;
-import lt.karolis.demo.TaskManagementSystem.persistance.Task;
-import lt.karolis.demo.TaskManagementSystem.persistance.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 

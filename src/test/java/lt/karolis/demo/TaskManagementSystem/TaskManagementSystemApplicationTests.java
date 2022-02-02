@@ -1,7 +1,6 @@
 package lt.karolis.demo.TaskManagementSystem;
 
 import lt.karolis.demo.TaskManagementSystem.controller.TaskController;
-import lt.karolis.demo.TaskManagementSystem.controller.TaskNotFoundException;
 import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import lt.karolis.demo.TaskManagementSystem.persistance.TaskRepository;
 import lt.karolis.demo.TaskManagementSystem.service.TaskService;
@@ -11,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.ResourceBundle;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

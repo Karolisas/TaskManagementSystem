@@ -1,5 +1,6 @@
-package lt.karolis.demo.TaskManagementSystem.controller;
+package lt.karolis.demo.TaskManagementSystem.exception;
 
+import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
