@@ -52,13 +52,14 @@ public class TaskController {
         System.out.println("Create Task");
         Task savedTask = service.createTask(task);
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedTask.getId()).toUri();
-
-        ResponseEntity<Task> responseEntity = ResponseEntity.created(location).build();
-        return responseEntity;
+        if (savedTask != null) {
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(savedTask.getId()).toUri();
+            return ResponseEntity.created(location).build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/savee")

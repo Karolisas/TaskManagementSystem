@@ -7,10 +7,8 @@ import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -34,6 +32,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 //@SpringBootTest
 @WebMvcTest()
 //@RunWith(SpringJUnit4ClassRunner.class)
@@ -56,7 +55,7 @@ public class UnitTestMockMvcTaskController_4 {
     @Mock
     SubTaskService service;
 
-    @Mock
+    @MockBean
     TaskService taskService;
 
     @InjectMocks
@@ -87,7 +86,7 @@ public class UnitTestMockMvcTaskController_4 {
                 .perform(MockMvcRequestBuilders.post("/task/save", task)
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(new ObjectMapper().writeValueAsString(task)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andReturn();
 
 
@@ -99,14 +98,13 @@ public class UnitTestMockMvcTaskController_4 {
     public void testAddTaskUnHappyPath() throws Exception {
         Task task = new Task();
 
-
         when(taskService.createTask(ArgumentMatchers.any(Task.class))).thenReturn(null);
 
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/task/save", task)
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(new ObjectMapper().writeValueAsString(task)))
-                .andExpect(MockMvcResultMatchers.status().is(302))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andReturn();
 
 
@@ -115,10 +113,10 @@ public class UnitTestMockMvcTaskController_4 {
     }
 
     @Test
-    public void getTask_throwsException () throws Exception {
+    public void getTask_throwsException() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/task/get/500")
-                .contentType(APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                        .contentType(APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andReturn();
     }
 }

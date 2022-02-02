@@ -24,7 +24,7 @@ public class Task {
     private String description;
 
     @Column (name = "level_priority")
-    private int levelPriority;
+    private Priority levelPriority;
 
 //    SELECT * FROM SUB_TASKS ;
 //    SELECT * FROM Tasks;
@@ -72,11 +72,11 @@ public class Task {
         return this;
     }
 
-    public int getLevelPriority() {
+    public Priority getLevelPriority() {
         return levelPriority;
     }
 
-    public Task setLevelPriority(int levelPriority) {
+    public Task setLevelPriority(Priority levelPriority) {
         this.levelPriority = levelPriority;
         return this;
     }
