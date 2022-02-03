@@ -43,6 +43,8 @@ dependencies {
     implementation 'org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE'
 //    implementation 'org.springframework.plugin:spring-plugin-core:2.0.0.RELEASE'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.5'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//    implementation 'org.springframework.data:spring-data-rest-hal-explorer:3.6.1' // does not work PluginRegistry ...
 
 }
 
