@@ -7,29 +7,26 @@ import lt.karolis.demo.TaskManagementSystem.persistance.Task;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.result.StatusResultMatchers;
 
 import java.nio.charset.Charset;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @RunWith(SpringRunner.class)
 //@RunWith(MockitoJUnitRunner.class)
@@ -118,5 +115,20 @@ public class UnitTestMockMvcTaskController_4 {
                         .contentType(APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andReturn();
+    }
+
+    @Test
+    public void getTask_CheckJsonFields() throws Exception {
+        when(taskService.getTaskById(anyLong())).thenReturn(new Task().setId(106l));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/task/2")
+                        .contentType(APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.id").value(106l))
+//                .andExpect(jsonPath("$.links").value("{rel=all-users, href=http://localhost/task/all}"));
+                .andExpect(jsonPath("$.links[0].rel").value("all-users"))
+                .andExpect(jsonPath("$.links[0].href").value("http://localhost/task/all"));
+
+//        Mockito.verify(CustomizedExceptionHandler.class).v
     }
 }
