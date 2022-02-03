@@ -1,6 +1,8 @@
 package lt.karolis.demo.TaskManagementSystem.persistance;
 
-import javax.persistence.Entity;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum Priority {
 
@@ -13,4 +15,22 @@ public enum Priority {
     Priority(int i) {
         priorityNo = i;
     }
+
+    public static Priority getPriorityByCOde(int dbData) {
+        return PRIORITY_MAP.get(dbData);
+    }
+
+    public int getPriorityNo() {
+        return priorityNo;
+    }
+
+    static Map<Integer, Priority> PRIORITY_MAP = new HashMap<>();
+
+    static {
+        for (Priority priority : values())
+            PRIORITY_MAP.put(priority.getPriorityNo(), priority);
+
+        Arrays.stream(values()).forEach(v -> PRIORITY_MAP.put(v.getPriorityNo(), v));
+    }
+
 }

@@ -83,4 +83,10 @@ public class TaskRepositoryTest {
 
 
     }
+
+    @Test
+    public void saveWithPriority(){
+        Task task = new Task().setLevelPriority(Priority.TO_DO);
+        Assert.assertEquals(task,taskRepository.save(task));
+    }
 }

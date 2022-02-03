@@ -57,4 +57,11 @@ public class TaskServiceIntegrationTest_1 {
         Assert.assertEquals("title", task.getTitle());
     }
 
+    @Test
+    public void createTaskWithPriority() {
+        Task task = new Task().setLevelPriority(Priority.TO_DO).setDescription("description");
+        Task afterSavingTask = taskService.createTask(task);
+        Assert.assertEquals(task.getLevelPriority(), afterSavingTask.getLevelPriority());
+    }
+
 }
