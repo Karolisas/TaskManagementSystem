@@ -1,7 +1,7 @@
 package lt.karolis.demo.TaskManagementSystem.controller;
 
 import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
-import lt.karolis.demo.TaskManagementSystem.persistance.Task;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
 import lt.karolis.demo.TaskManagementSystem.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

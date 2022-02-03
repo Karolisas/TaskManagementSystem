@@ -1,8 +1,8 @@
-package lt.karolis.demo.TaskManagementSystem.persistance;
+package lt.karolis.demo.TaskManagementSystem.persistance.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
 
 import javax.persistence.*;
 

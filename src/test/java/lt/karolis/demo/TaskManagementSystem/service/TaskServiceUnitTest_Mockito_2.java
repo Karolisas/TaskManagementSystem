@@ -1,7 +1,7 @@
 package lt.karolis.demo.TaskManagementSystem.service;
 
-import lt.karolis.demo.TaskManagementSystem.persistance.Task;
-import lt.karolis.demo.TaskManagementSystem.persistance.TaskRepository;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
+import lt.karolis.demo.TaskManagementSystem.persistance.repository.TaskRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

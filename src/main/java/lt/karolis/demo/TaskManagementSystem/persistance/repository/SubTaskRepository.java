@@ -1,5 +1,6 @@
-package lt.karolis.demo.TaskManagementSystem.persistance;
+package lt.karolis.demo.TaskManagementSystem.persistance.repository;
 
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.SubTask;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

@@ -1,19 +1,16 @@
 package lt.karolis.demo.TaskManagementSystem.persistance;
 
-import lt.karolis.demo.TaskManagementSystem.service.TaskService;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
+import lt.karolis.demo.TaskManagementSystem.persistance.repository.TaskRepository;
 import org.junit.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Order;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Profile;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.ConstraintViolationException;

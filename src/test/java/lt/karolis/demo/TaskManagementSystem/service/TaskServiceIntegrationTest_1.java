@@ -1,9 +1,8 @@
 package lt.karolis.demo.TaskManagementSystem.service;
 
-import lt.karolis.demo.TaskManagementSystem.controller.TaskController;
 import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
-import lt.karolis.demo.TaskManagementSystem.persistance.SubTask;
-import lt.karolis.demo.TaskManagementSystem.persistance.Task;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.SubTask;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

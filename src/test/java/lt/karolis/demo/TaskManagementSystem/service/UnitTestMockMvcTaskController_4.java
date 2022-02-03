@@ -2,8 +2,8 @@ package lt.karolis.demo.TaskManagementSystem.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lt.karolis.demo.TaskManagementSystem.controller.TaskController;
-import lt.karolis.demo.TaskManagementSystem.persistance.SubTaskRepository;
-import lt.karolis.demo.TaskManagementSystem.persistance.Task;
+import lt.karolis.demo.TaskManagementSystem.persistance.repository.SubTaskRepository;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

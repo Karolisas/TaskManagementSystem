@@ -1,10 +1,9 @@
 package lt.karolis.demo.TaskManagementSystem;
 
 import lt.karolis.demo.TaskManagementSystem.controller.TaskController;
-import lt.karolis.demo.TaskManagementSystem.persistance.Task;
-import lt.karolis.demo.TaskManagementSystem.persistance.TaskRepository;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
+import lt.karolis.demo.TaskManagementSystem.persistance.repository.TaskRepository;
 import lt.karolis.demo.TaskManagementSystem.service.TaskService;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

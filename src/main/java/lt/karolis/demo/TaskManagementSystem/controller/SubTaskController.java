@@ -1,8 +1,7 @@
 package lt.karolis.demo.TaskManagementSystem.controller;
 
-import lt.karolis.demo.TaskManagementSystem.persistance.SubTask;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.SubTask;
 import lt.karolis.demo.TaskManagementSystem.service.SubTaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -2,9 +2,9 @@ package lt.karolis.demo.TaskManagementSystem.service;
 
 import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
 import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
-import lt.karolis.demo.TaskManagementSystem.persistance.SubTask;
-import lt.karolis.demo.TaskManagementSystem.persistance.Task;
-import lt.karolis.demo.TaskManagementSystem.persistance.TaskRepository;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.SubTask;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
+import lt.karolis.demo.TaskManagementSystem.persistance.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;

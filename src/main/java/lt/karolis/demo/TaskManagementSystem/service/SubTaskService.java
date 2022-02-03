@@ -1,8 +1,8 @@
 package lt.karolis.demo.TaskManagementSystem.service;
 
 import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
-import lt.karolis.demo.TaskManagementSystem.persistance.SubTask;
-import lt.karolis.demo.TaskManagementSystem.persistance.SubTaskRepository;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.SubTask;
+import lt.karolis.demo.TaskManagementSystem.persistance.repository.SubTaskRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 

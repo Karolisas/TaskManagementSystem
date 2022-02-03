@@ -1,5 +1,6 @@
 package lt.karolis.demo.TaskManagementSystem.persistance;
 
+import lt.karolis.demo.TaskManagementSystem.persistance.repository.TaskRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
