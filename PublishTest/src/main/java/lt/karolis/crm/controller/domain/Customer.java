@@ -1,4 +1,4 @@
-package lt.karolis.crm;
+package lt.karolis.crm.controller.domain;
 
 import javax.persistence.*;
 
