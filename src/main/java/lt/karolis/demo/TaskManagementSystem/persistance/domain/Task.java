@@ -1,6 +1,8 @@
 package lt.karolis.demo.TaskManagementSystem.persistance.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
 
@@ -34,6 +36,7 @@ public class Task {
     //    @OneToMany(mappedBy = "parentTask", cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToMany(mappedBy = "parentTask", cascade = CascadeType.ALL)
 //    @JsonManagedReference
+    @JsonBackReference
 //    @JoinColumn(name = "XX_SUB_TASK_ID")
 //    @OneToMany(cascade = CascadeType.ALL)
     private List<SubTask> subTasks;
@@ -110,7 +113,7 @@ public class Task {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", levelPriority=" + levelPriority +
-                ", subTasks=" + subTasks +
+//                ", subTasks=" + subTasks +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package lt.karolis.demo.TaskManagementSystem.persistance;
 
 import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
 import lt.karolis.demo.TaskManagementSystem.persistance.repository.TaskRepository;
+import lt.karolis.demo.TaskManagementSystem.service.TaskService;
 import org.junit.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Order;

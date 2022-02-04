@@ -3,6 +3,7 @@ package lt.karolis.demo.TaskManagementSystem.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
+import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
 import lt.karolis.demo.TaskManagementSystem.persistance.domain.SubTask;
 import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
 import lt.karolis.demo.TaskManagementSystem.persistance.repository.TaskRepository;
@@ -38,17 +39,17 @@ public class SubTaskControllerTest {
 
     @Test
     void createSubTask() throws Exception {
-        SubTask subTask = new SubTask().setDescription("BBBBBC");
+        SubTask subTask = new SubTask()
+                .setDescription("BBBBBC")
+                .setLevelPriority(Priority.DONE);
 
-//        Task task = subTaskService.createSubTask().getParentTask();
-//        subTask.setParentTask(task);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/tasks/{taskId}/subtasks", 186l)
                         .contentType(MediaType.APPLICATION_JSON)
-//                        .content(new Gson().toJson(subTask)
-                                .content(new ObjectMapper().writeValueAsString(subTask)
+                        .content(new Gson().toJson(subTask)
+//                        .content(new ObjectMapper().writeValueAsString(subTask)
                         ))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 }

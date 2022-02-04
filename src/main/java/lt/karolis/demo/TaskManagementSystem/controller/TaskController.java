@@ -1,5 +1,7 @@
 package lt.karolis.demo.TaskManagementSystem.controller;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
 import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
 import lt.karolis.demo.TaskManagementSystem.service.TaskService;
@@ -22,6 +24,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("task")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class TaskController {
 
     @Autowired
