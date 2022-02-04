@@ -20,6 +20,9 @@ public class TaskServiceIntegrationTest_1 {
     @Autowired
     TaskService taskService;
 
+    @Autowired
+    SubTaskService subTaskService;
+
     @Before
     public void setUp() throws Exception {
 
@@ -61,6 +64,16 @@ public class TaskServiceIntegrationTest_1 {
         Task task = new Task().setLevelPriority(Priority.TO_DO).setDescription("description");
         Task afterSavingTask = taskService.createTask(task);
         Assert.assertEquals(task.getLevelPriority(), afterSavingTask.getLevelPriority());
+    }
+
+    @Test
+    public void createSubTaskWithPriority() {
+        SubTask subTask = new SubTask().setLevelPriority(Priority.TO_DO).setDescription("description");
+
+        Task task = taskService.getTaskById(186l);
+        subTask.setParentTask(task);
+
+        Assert.assertEquals(subTask, subTaskService.createSubTask(subTask));
     }
 
 }

@@ -27,8 +27,8 @@ public class SubTaskService {
         return repository.findAll();
     }
 
-    public SubTask createTask(SubTask task) {
-        return repository.save(task);
+    public SubTask createSubTask(SubTask subTask) {
+        return repository.save(subTask);
     }
 
 

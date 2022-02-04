@@ -1,6 +1,7 @@
 package lt.karolis.demo.TaskManagementSystem.persistance.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lt.karolis.demo.TaskManagementSystem.persistance.Priority;
 
@@ -22,11 +23,11 @@ public class SubTask {
     @Column
     private String description;
 
-    @Column (name = "level_priority")
+    @Column(name = "level_priority")
     private Priority levelPriority;
 
-    @ManyToOne (cascade = CascadeType.DETACH)
-    @JoinColumn (name= "PARENT_ID")
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "PARENT_ID")
 //    @JsonBackReference
     private Task parentTask;
 
@@ -74,7 +75,6 @@ public class SubTask {
         this.levelPriority = priority;
         return this;
     }
-
 
 
     @Override

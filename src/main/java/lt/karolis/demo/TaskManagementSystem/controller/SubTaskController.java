@@ -1,20 +1,27 @@
 package lt.karolis.demo.TaskManagementSystem.controller;
 
+import lt.karolis.demo.TaskManagementSystem.exception.TaskNotFoundException;
 import lt.karolis.demo.TaskManagementSystem.persistance.domain.SubTask;
+import lt.karolis.demo.TaskManagementSystem.persistance.domain.Task;
 import lt.karolis.demo.TaskManagementSystem.service.SubTaskService;
+import lt.karolis.demo.TaskManagementSystem.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("task/subtask")
+@RequestMapping("tasks/{taskId}/subtasks")
 public class SubTaskController {
 
-//    @Autowired
+    //    @Autowired
     private final SubTaskService service;
 
-    public SubTaskController(SubTaskService service) {
+    private final TaskService taskService;
+
+    public SubTaskController(SubTaskService service, TaskService taskService) {
         this.service = service;
+        this.taskService = taskService;
     }
 
     @GetMapping
@@ -32,10 +39,15 @@ public class SubTaskController {
         return service.getAllTasks();
     }
 
-    @PostMapping("/save")
-    public SubTask createtSubTask(@RequestBody SubTask task) {
-        System.out.println("asdasd");
-        return service.createTask(task);
+    @PostMapping()
+    public SubTask createSubTask(@RequestBody SubTask subTask, @PathVariable Long taskId) {
+        System.out.println("createtSubTask");
+
+        Task task =Optional.ofNullable(taskService.getTaskById(taskId))
+                .orElseThrow(() -> new TaskNotFoundException("Not found:::: "+ taskId));
+
+        subTask.setParentTask(task);
+        return service.createSubTask(subTask);
     }
 
 //    @PutMapping(value = "/{id}")

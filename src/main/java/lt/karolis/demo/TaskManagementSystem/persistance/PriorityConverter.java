@@ -2,10 +2,11 @@ package lt.karolis.demo.TaskManagementSystem.persistance;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-@Converter (autoApply = true)
+@Converter(autoApply = true)
 public class PriorityConverter implements AttributeConverter<Priority, Integer> {
     @Override
     public Integer convertToDatabaseColumn(Priority attribute) {
@@ -16,8 +17,10 @@ public class PriorityConverter implements AttributeConverter<Priority, Integer> 
 
     @Override
     public Priority convertToEntityAttribute(Integer dbData) {
+        if (dbData == null)
+            return null;
         return Stream.of(Priority.values())
-                .filter(a->a.getPriorityNo() == (dbData))
+                .filter(priority -> Objects.equals(priority.getPriorityNo(), dbData))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
