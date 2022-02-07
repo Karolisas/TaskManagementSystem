@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 //@ControllerAdvice
-//@ResponseStatus(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED)
+@ResponseStatus(HttpStatus.BANDWIDTH_LIMIT_EXCEEDED) // veikia, tik overidina ControllerAdvice
 public class CustomerNotFounException extends RuntimeException{
 
     public CustomerNotFounException() {

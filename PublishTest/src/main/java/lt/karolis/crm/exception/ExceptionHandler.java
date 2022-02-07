@@ -10,7 +10,6 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Date;
 
 @ControllerAdvice
-@RestController
 public class ExceptionHandler {
 
 
