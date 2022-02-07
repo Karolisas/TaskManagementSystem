@@ -3,17 +3,17 @@ package lt.karolis.crm.controller;
 import lt.karolis.crm.dao.EmployeeDao;
 import lt.karolis.crm.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@Controller //doesn't work
 @RestController
 @RequestMapping("/employees")
 public class EmployeeRestController {
 
-    @Autowired
+    @Autowired @Qualifier("EmployeeDaoImpl_JPA_ABC")
     private EmployeeDao employeeDao;
 
     @GetMapping

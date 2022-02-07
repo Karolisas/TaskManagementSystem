@@ -2,34 +2,30 @@ package lt.karolis.crm.dao;
 
 import lt.karolis.crm.domain.Employee;
 import lt.karolis.crm.exception.CustomerNotFounException;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
-@Repository
-public class EmployeeDaoImpl implements EmployeeDao {
-
-
+@Repository(value = "EmployeeDaoImpl_JPA_ABC")
+//@Qualifier("EmployeeDaoImpl_JPA_ABC")
+public class EmployeeDaoImpl_JPA implements EmployeeDao {
     EntityManager entityManager;
 
     @Autowired
-    public EmployeeDaoImpl(EntityManager entityManager) {
+    public EmployeeDaoImpl_JPA(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
     @Transactional
     public List<Employee> getAllEmployees() {
-        //get query hibernate session
-        Session session = entityManager.unwrap(Session.class);
         // create a query
-        Query<Employee> query = session.createQuery("from Employee", Employee.class);
+        Query query = entityManager.createQuery("from Employee");
         //execute query and get result list
         List<Employee> employees = query.getResultList();
 //        return results
@@ -40,8 +36,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     @Transactional
     public Employee getEmployeeById(Long employeeId) {
-        Session session = entityManager.unwrap(Session.class);
-        Employee employee = session.get(Employee.class, employeeId);
+        Employee employee = entityManager.find(Employee.class, employeeId);
         if (employee == null) {
             throw new CustomerNotFounException();
         }
@@ -51,21 +46,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     @Transactional // without does not work
     public Employee createEmployee(Employee employee) {
-        Session session = entityManager.unwrap(Session.class);
-        session.saveOrUpdate(employee);
+        Employee savedEmployee = entityManager.merge(employee);
+        employee.setId(savedEmployee.getId());
         return employee;
     }
 
     @Override
     @Transactional // without does not work
     public Employee deleteEmployee(Long employeeId) {
-        Session session = entityManager.unwrap(Session.class);
-        Employee employee = session.get(Employee.class, employeeId);
-        if (employee == null) {
-            throw new RuntimeException("Employee already deleted id=" + employeeId);
-        }
-        session.delete(employee);
-
+        Employee employee = entityManager.find(Employee.class, employeeId);
+        Query query = entityManager.createQuery("delete from Employees where id = :employeeUd");
+//        entityManager.delete not exist
+        query.setParameter("employeeUd", employeeId);
+        query.executeUpdate();
         return employee;
     }
 }
