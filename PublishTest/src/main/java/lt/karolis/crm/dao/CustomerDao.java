@@ -1,6 +1,6 @@
-package lt.karolis.crm.controller;
+package lt.karolis.crm.dao;
 
-import lt.karolis.crm.controller.domain.Customer;
+import lt.karolis.crm.domain.Customer;
 
 import java.util.List;
 
