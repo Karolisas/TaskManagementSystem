@@ -1,6 +1,7 @@
 package lt.karolis.crm.controller;
 
 import lt.karolis.crm.dao.EmployeeDao;
+import lt.karolis.crm.dao.EmployeeService;
 import lt.karolis.crm.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,8 +14,8 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeRestController {
 
-    @Autowired @Qualifier("EmployeeDaoImpl_JPA_ABC")
-    private EmployeeDao employeeDao;
+    @Autowired // @Qualifier("EmployeeDaoImpl_JPA_ABC")
+    private EmployeeService employeeDao;
 
     @GetMapping
     public List<Employee> getListEmployees(Model model) {
